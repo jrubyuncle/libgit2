@@ -133,6 +133,11 @@ support for HTTPS connections insead of OpenSSL.
   path. For this, `GIT_CREDTYPE_SSH_MEMORY` and
   `git_cred_ssh_key_memory_new()` have been added.
 
+* `git_config_lock()` and `git_config_unlock()` have been added, which
+  allow for transactional/atomic complex updates to the configuration,
+  removing the opportunity for concurrent operations and not
+  committing any changes until the unlock.
+
 ### API removals
 
 * `git_remote_save()` and `git_remote_clear_refspecs()` have been
@@ -250,6 +255,10 @@ support for HTTPS connections insead of OpenSSL.
 
 * `GIT_EMERGECONFLICT` is now `GIT_ECONFLICT`, which more accurately
   describes the nature of the error.
+
+* `git_config_backend` has gained two entries. `lock` and `unlock`
+  with which to implement the transactional/atomic semantics for the
+  configuration backend.
 
 v0.22
 ------
